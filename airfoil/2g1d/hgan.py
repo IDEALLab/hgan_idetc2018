@@ -206,63 +206,20 @@ class HGAN(object):
         dim = (self.input_shape[0]+12)/16
         weight_decay = 1e-5
         noise_std = 0.01
-        dropout = 0.4
         
         c2 = Input(shape=(self.latent_dim,))
         z2 = Input(shape=(self.noise_dim,))
-        
-        cz = concatenate([c2, z2])
-        
-        f2 = Dense(dim*2*depth, kernel_regularizer=l2(weight_decay))(cz)
-        f2 = BatchNormalization(momentum=0.9)(f2)
-        f2 = LeakyReLU(alpha=0.2)(f2)
-        f2 = Reshape((dim, 2, depth))(f2)
-
-        f2 = UpSampling2D((2,1))(f2)
-        f2 = Conv2DTranspose(int(depth/16), (kernel_height,2), padding='same', 
-                            kernel_regularizer=l2(weight_decay))(f2)
-        f2 = BatchNormalization(momentum=0.9)(f2)
-        f2 = LeakyReLU(alpha=0.2)(f2)
-        f2 = GaussianNoise(noise_std)(f2)
-
-        f2 = UpSampling2D((2,1))(f2)
-        f2 = Conv2DTranspose(int(depth/16), (kernel_height,2), padding='same', 
-                            kernel_regularizer=l2(weight_decay))(f2)
-        f2 = BatchNormalization(momentum=0.9)(f2)
-        f2 = LeakyReLU(alpha=0.2)(f2)
-        f2 = GaussianNoise(noise_std)(f2)
-        
         x1 = Input(shape=self.input_shape)
+        x1_flat = Flatten()(x1)
         
-        f1 = ZeroPadding2D((6, 0))(x1)
+        x = concatenate([c2, z2, x1_flat])
         
-        f1 = Conv2D(depth/16, (kernel_height,2), strides=(2,1), padding='same', 
-                   kernel_regularizer=l2(weight_decay))(f1)
-        f1 = BatchNormalization(momentum=0.9)(f1)
-        f1 = LeakyReLU(alpha=0.2)(f1)
-        f1 = Dropout(dropout)(f1)
+        x = Dense(dim*2*depth, kernel_regularizer=l2(weight_decay))(x)
+        x = BatchNormalization(momentum=0.9)(x)
+        x = LeakyReLU(alpha=0.2)(x)
+        x = Reshape((dim, 2, depth))(x)
 
-        f1 = Conv2D(depth/8, (kernel_height,2), strides=(2,1), padding='same', 
-                   kernel_regularizer=l2(weight_decay))(f1)
-        f1 = BatchNormalization(momentum=0.9)(f1)
-        f1 = LeakyReLU(alpha=0.2)(f1)
-        f1 = Dropout(dropout)(f1)
-
-        f = concatenate([f1, f2])
-        
-        f = Conv2D(depth/4, (kernel_height,2), strides=(2,1), padding='same', 
-                   kernel_regularizer=l2(weight_decay))(f)
-        f = BatchNormalization(momentum=0.9)(f)
-        f = LeakyReLU(alpha=0.2)(f)
-        f = Dropout(dropout)(f)
-
-        f = Conv2D(depth/2, (kernel_height,2), strides=(2,1), padding='same', 
-                   kernel_regularizer=l2(weight_decay))(f)
-        f = BatchNormalization(momentum=0.9)(f)
-        f = LeakyReLU(alpha=0.2)(f)
-        f = Dropout(dropout)(f)
-
-        x = UpSampling2D((2,1))(f)
+        x = UpSampling2D((2,1))(x)
         x = Conv2DTranspose(int(depth/2), (kernel_height,2), padding='same', 
                             kernel_regularizer=l2(weight_decay))(x)
         x = BatchNormalization(momentum=0.9)(x)

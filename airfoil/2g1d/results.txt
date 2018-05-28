@@ -1,1 +1,5 @@
-Wall clock time: 8.1956911087 sec
+Wall clock time: 6.07801870498 hr
+Mean log likelihood for assembly: 801.9 +/- 71.3
+Relative diversity for assembly: 1.014 +/- 0.009
+Consistency for parent latent space: 0.961 +/- 0.001
+Consistency for child latent space: 0.919 +/- 0.014
