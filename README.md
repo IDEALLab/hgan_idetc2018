@@ -4,6 +4,7 @@
 
 ## Required packages
 
+- keras
 - tensorflow
 - numpy
 - matplotlib
