@@ -2,6 +2,21 @@
 
 ![Alt text](/architecture.png)
 
+## License
+This code is licensed under the MIT license. Feel free to use all or portions for your research or related projects so long as you provide the following citation information:
+
+Chen W, Jeyaseelan A, Fuge M. Synthesizing Designs With Inter-Part Dependencies Using Hierarchical Generative Adversarial Networks. ASME. International Design Engineering Technical Conferences and Computers and Information in Engineering Conference, Volume 2A: 44th Design Automation Conference:V02AT03A007. doi:10.1115/DETC2018-85339.
+
+    @inproceedings{chen2018hgan,
+        author={Chen, Wei and Jeyaseelan, Ashwin and Fuge, Mark},
+        title={Synthesizing Designs with Inter-part Dependencies Using Hierarchical Generative Adversarial Networks},
+        booktitle={ASME 2018 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference},
+        year={2018},
+        month={Aug},
+        publisher={ASME},
+        address={Quebec City, Canada}
+    }
+
 ## Required packages
 
 - keras
