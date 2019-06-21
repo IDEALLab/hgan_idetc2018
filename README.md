@@ -1,5 +1,7 @@
 # Hierarchical-GAN
 
+Please check out our more recent work on this topic [here](https://github.com/wchen459/hgan_jmd_2019).
+
 ![Alt text](/architecture.png)
 
 ## License
