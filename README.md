@@ -1,6 +1,6 @@
 # Hierarchical-GAN
 
-Please check out our more recent work on this topic [here](https://github.com/wchen459/hgan_jmd_2019).
+Please check out our more recent work on this topic [here](https://github.com/IDEALLab/hgan_jmd_2019).
 
 ![Alt text](/architecture.png)
 
